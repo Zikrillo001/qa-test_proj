@@ -1,0 +1,49 @@
+name: QA Tests (AutomationExercise)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    env:
+      BASE_URL: https://automationexercise.com
+      HEADLESS: "true"
+      BROWSER: ${{ matrix.browser }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          pip install playwright pytest pytest-html requests python-dotenv ruff black faker
+          playwright install --with-deps
+
+      - name: Lint & format check
+        run: |
+          ruff check .
+          black --check .
+
+      - name: Run tests + HTML report
+        run: |
+          mkdir -p reports
+          pytest --html=reports/report_${{ matrix.browser }}.html --self-contained-html
+
+      - name: Upload reports (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.browser }}
+          path: reports/

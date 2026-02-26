@@ -1,5 +1,6 @@
 from src.core.base_page import BasePage
 
+
 class AuthPage(BasePage):
     # Login form
     LOGIN_EMAIL = "input[data-qa='login-email']"

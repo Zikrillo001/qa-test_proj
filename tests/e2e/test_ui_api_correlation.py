@@ -3,6 +3,7 @@ from src.pages.home_page import HomePage
 from src.pages.products_page import ProductsPage
 from src.api.client import ApiClient
 
+
 @pytest.mark.regression
 def test_ui_products_exist_in_api(page, base_url):
     # UI: Products page'dan bir nechta product name olamiz

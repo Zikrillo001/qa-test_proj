@@ -1,6 +1,7 @@
 import pytest
 from src.api.client import ApiClient
 
+
 @pytest.mark.regression
 def test_verify_login_missing_params_returns_error():
     api = ApiClient()
@@ -20,7 +21,10 @@ def test_verify_login_missing_params_returns_error():
 @pytest.mark.regression
 def test_verify_login_invalid_creds_returns_error():
     api = ApiClient()
-    resp = api.post("/api/verifyLogin", data={"email": "notreal@example.com", "password": "wrongpass123"})
+    resp = api.post(
+        "/api/verifyLogin",
+        data={"email": "notreal@example.com", "password": "wrongpass123"},
+    )
 
     assert resp.status_code in (200, 400)
     try:

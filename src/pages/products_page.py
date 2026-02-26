@@ -1,5 +1,6 @@
 from src.core.base_page import BasePage
 
+
 class ProductsPage(BasePage):
     PRODUCTS_LINK = "a[href='/products']"
     PRODUCT_NAMES = ".productinfo p"  # product name textlar ko'pincha shu yerda

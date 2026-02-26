@@ -1,5 +1,6 @@
 from src.core.base_page import BasePage
 
+
 class HomePage(BasePage):
     SIGNUP_LOGIN_LINK = "a[href='/login']"
 

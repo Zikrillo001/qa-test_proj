@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from src.config.settings import BASE_URL, HEADLESS
 
+
 @pytest.mark.smoke
 def test_home_page_opens():
     with sync_playwright() as p:

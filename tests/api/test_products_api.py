@@ -1,6 +1,7 @@
 import pytest
 from src.api.client import ApiClient
 
+
 @pytest.mark.smoke
 def test_products_list_returns_data():
     api = ApiClient()
